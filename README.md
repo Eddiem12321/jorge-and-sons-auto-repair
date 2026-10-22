@@ -28,6 +28,7 @@ A four-page marketing site for **Jorge & Sons Auto Repair**, a family-owned mech
 - **Logo:** a type-only wordmark framed like a hand-painted shop sign, a nod to Jorge painting the original sign himself. It uses only the business name, so it adds no new copy.
 - **Mobile-first:** most customers will visit on a phone, so every phone number is a `tel:9735550142` link and a sticky **Call** bar stays at the bottom of the screen on small devices. The header collapses into a hamburger menu (it closes with Escape, an outside click, or when the screen widens).
 - **Subtle motion:** gentle hover lifts and a fade-in on scroll, both turned off for visitors who set "reduce motion".
+- **Scroll-driven video:** on the Home page the opening section stays pinned while you scroll, and scrolling moves a repair video forward. Stop scrolling and it stops; scroll up and it plays backward. The Services header does the same as it scrolls away. Each clip downloads once so scrubbing stays smooth, and visitors with reduced motion or Data Saver turned on see a still image instead.
 - **Small touches:** on the Contact page, today's hours are highlighted automatically. The "Four bays now" line on the About page gets a small four-bay illustration.
 
 ## Copy rules
@@ -47,14 +48,19 @@ All on-page text is the client copy, used verbatim. The only additions are funct
 
 ## Photo credits
 
-All photos are free to use under the [Unsplash License](https://unsplash.com/license) and are hotlinked from `images.unsplash.com`.
+The photos are free to use under the [Unsplash License](https://unsplash.com/license) and are hotlinked from `images.unsplash.com`.
 
 | Where | Photo | Photographer |
 | --- | --- | --- |
-| Home, opening | [Mechanic working on car engine](https://unsplash.com/photos/mechanic-working-on-car-engine-UZUzvJEvKnI) | [Sten Rademaker](https://unsplash.com/@stenrademaker) |
 | Home, our promise | [Man refilling motor oil on car engine bay](https://unsplash.com/photos/man-refilling-motor-oil-on-car-engine-bay-V37iTrYZz2E) | [Tim Mossholder](https://unsplash.com/@timmossholder) |
-| Services, header | [A man is working on a car's engine](https://unsplash.com/photos/a-man-is-working-on-a-cars-engine-s4d_ESS0ylA) | [Maxim Hopman](https://unsplash.com/@nampoh) |
 | About, our story | [A man working on a machine in a garage](https://unsplash.com/photos/a-man-working-on-a-machine-in-a-garage-KhF58h0hTbc) | [Kato Blackmore](https://unsplash.com/@katoblackmore) |
+
+Videos are free to use under the [Pexels License](https://www.pexels.com/license/) and are hotlinked from `videos.pexels.com` (still frames from `images.pexels.com`).
+
+| Where | Video | Videographer |
+| --- | --- | --- |
+| Home, opening | [Person Repairing a Car Engine](https://www.pexels.com/video/person-repairing-a-car-engine-8469674/) | [Anastasia Shuraeva](https://www.pexels.com/@anastasia-shuraeva/) |
+| Services, header | [Close-up of a Car Engine Showing Mechanical Details](https://www.pexels.com/video/close-up-of-a-car-engine-showing-mechanical-details-39112150/) | [Pedro H. Novais](https://www.pexels.com/@pedro-h-novais-2154429539/) |
 
 Icons are inline SVGs. Some are drawn by hand and others are adapted from [Feather Icons](https://feathericons.com/) (MIT License).
 
