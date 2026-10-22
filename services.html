@@ -14,6 +14,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://images.pexels.com">
+  <link rel="preconnect" href="https://videos.pexels.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Source+Sans+3:wght@400;600;700&amp;family=Zilla+Slab:ital,wght@0,500;0,600;0,700;1,500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
@@ -63,13 +65,17 @@
 
   <main id="main">
     <!-- What We Fix -->
-    <section class="page-hero page-hero--image" aria-labelledby="page-title">
+    <!-- Scroll-scrubbed video: plays forward as the header scrolls away, backward on the way up -->
+    <section class="page-hero page-hero--image" aria-labelledby="page-title" data-scrub="through">
       <div class="page-hero-media">
-        <img src="https://images.unsplash.com/photo-1632733711679-529326f6db12?auto=format&amp;fit=crop&amp;w=1600&amp;q=65"
-             srcset="https://images.unsplash.com/photo-1632733711679-529326f6db12?auto=format&amp;fit=crop&amp;w=800&amp;q=65 800w,
-                     https://images.unsplash.com/photo-1632733711679-529326f6db12?auto=format&amp;fit=crop&amp;w=1600&amp;q=65 1600w"
-             sizes="100vw" width="1600" height="1067" fetchpriority="high"
-             alt="A technician’s hands test the fuse box under the hood of a car with a diagnostic probe">
+        <img src="https://images.pexels.com/videos/39112150/pexels-photo-39112150.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
+             srcset="https://images.pexels.com/videos/39112150/pexels-photo-39112150.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800 800w,
+                     https://images.pexels.com/videos/39112150/pexels-photo-39112150.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600 1600w"
+             sizes="100vw" width="1600" height="900" fetchpriority="high"
+             alt="Close-up of a car’s engine bay, with hoses, belts, and orange-capped fittings">
+        <video class="scrub-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1"
+               data-src-md="https://videos.pexels.com/video-files/39112150/16640571_960_540_24fps.mp4"
+               data-src-lg="https://videos.pexels.com/video-files/39112150/16640573_1280_720_24fps.mp4"></video>
       </div>
       <div class="container">
         <span class="rule" aria-hidden="true"></span>
