@@ -28,12 +28,12 @@ A four-page marketing site for **Jorge & Sons Auto Repair**, a family-owned mech
 - **Logo:** a type-only wordmark framed like a hand-painted shop sign, a nod to Jorge painting the original sign himself. It uses only the business name, so it adds no new copy.
 - **Mobile-first:** most customers will visit on a phone, so every phone number is a `tel:9735550142` link and a sticky **Call** bar stays at the bottom of the screen on small devices. The header collapses into a hamburger menu (it closes with Escape, an outside click, or when the screen widens).
 - **Subtle motion:** gentle hover lifts and a fade-in on scroll, both turned off for visitors who set "reduce motion".
-- **Scroll-driven video:** the Home and Services headers play a repair video while you scroll. The page scrolls normally and the video moves with it: stop scrolling and it stops, scroll up and it plays backward. Each clip downloads once so scrubbing stays smooth, and visitors with reduced motion or Data Saver turned on see a still image instead.
+- **Background video:** the Home and Services headers play a muted, looping repair video. It only plays while it is on screen, a small button pauses it (for accessibility), and visitors with reduced motion or Data Saver turned on see a still image instead.
 - **Small touches:** on the Contact page, today's hours are highlighted automatically. The "Four bays now" line on the About page gets a small four-bay illustration.
 
 ## Copy rules
 
-All on-page text is the client copy, used verbatim. The only additions are functional UI labels: the nav links (Home, Services, About, Contact), form labels (Name, Phone, Email, Message, Send), the mobile **Call** button, a keyboard-only "Skip to content" link, and image alt text.
+All on-page text is the client copy, used verbatim. The only additions are functional UI labels: the nav links (Home, Services, About, Contact), form labels (Name, Phone, Email, Message, Send), the mobile **Call** button, an icon-only pause button for the background videos, a keyboard-only "Skip to content" link, and image alt text.
 
 - Section names from the copy doc (for example "Our Promise" or "The Team") are not shown on the page. They're used only as invisible `aria-label`s so screen-reader users can navigate by section.
 - Team photos are styled placeholders with role icons, not stock photos of people standing in for the Ramírez family.
