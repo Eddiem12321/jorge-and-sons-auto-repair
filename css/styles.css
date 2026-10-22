@@ -534,8 +534,8 @@ blockquote, figure { margin: 0; }
   .quote-card { padding: 3.25rem 2.5rem 2.25rem; }
   .quote-card blockquote p { font-size: 1.45rem; }
 
-  .services-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-  .service { flex-direction: column; align-items: flex-start; padding: 1.75rem 1.5rem; min-height: 170px; }
+  .services-grid { grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  .service { flex-direction: column; align-items: flex-start; padding: 1.5rem 1.1rem; min-height: 190px; }
   .service-icon { width: 60px; height: 60px; }
   .good-to-know { grid-template-columns: auto 1fr; gap: 2rem; padding: 2.5rem 3rem; }
 
@@ -560,6 +560,6 @@ blockquote, figure { margin: 0; }
 }
 
 @media (min-width: 1200px) {
-  .services-grid { grid-template-columns: repeat(5, 1fr); }
-  .service { min-height: 190px; }
+  .services-grid { gap: 1.25rem; }
+  .service { padding: 1.75rem 1.5rem; }
 }
