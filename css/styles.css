@@ -52,6 +52,7 @@ img { height: auto; }
 a { color: var(--accent-dark); text-underline-offset: .18em; }
 a:hover { color: var(--accent); }
 h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0; color: var(--ink); font-weight: 700; }
+h1, h2, h3, .hero-tagline, .closing-line, .good-to-know p { text-wrap: balance; }
 p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
 address { font-style: normal; }
@@ -304,12 +305,12 @@ blockquote, figure { margin: 0; }
 .icon-inline svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
 
 /* ---------- Services grid ---------- */
-.services-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
 .service {
-  display: flex; align-items: center; gap: 1rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: .85rem;
   background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 1.15rem 1.25rem;
-  font-weight: 600; font-size: 1.08rem; line-height: 1.35; color: var(--ink);
+  padding: 1.15rem 1rem;
+  font-weight: 600; font-size: 1rem; line-height: 1.35; color: var(--ink);
   transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
 }
 .service:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: #cbbda7; }
@@ -372,7 +373,7 @@ blockquote, figure { margin: 0; }
 }
 .bays span::after { content: ""; position: absolute; left: 6px; right: 6px; top: 6px; height: 3px; background: var(--accent); box-shadow: 0 7px 0 var(--accent), 0 14px 0 var(--accent); opacity: .85; }
 
-.team-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+.team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .team-card {
   background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
   overflow: hidden; text-align: center;
@@ -380,7 +381,7 @@ blockquote, figure { margin: 0; }
 }
 .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .team-avatar {
-  display: grid; place-items: center; height: 150px;
+  display: grid; place-items: center; height: 120px;
   background-color: var(--ink);
   background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 10px, transparent 10px 20px);
   color: var(--accent-light);
@@ -389,12 +390,12 @@ blockquote, figure { margin: 0; }
 .team-card:nth-child(3) .team-avatar { background-color: #2e2a27; }
 .team-card:nth-child(4) .team-avatar { background-color: #3a2c24; }
 .team-avatar span {
-  display: grid; place-items: center; width: 88px; height: 88px; border-radius: 50%;
+  display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%;
   background: rgba(255, 255, 255, .06); border: 2px solid rgba(240, 161, 94, .6);
 }
-.team-avatar svg { width: 44px; height: 44px; }
-.team-body { padding: 1.4rem 1.25rem 1.6rem; }
-.team-body h3 { font-size: 1.4rem; margin-bottom: .35rem; }
+.team-avatar svg { width: 36px; height: 36px; }
+.team-body { padding: 1.1rem .75rem 1.25rem; }
+.team-body h3 { font-size: 1.2rem; margin-bottom: .35rem; }
 .team-body p { color: var(--muted); font-weight: 600; }
 .team-cta { margin-top: 2.5rem; text-align: center; }
 
@@ -490,8 +491,7 @@ blockquote, figure { margin: 0; }
    Breakpoints (mobile-first)
    ========================================================================== */
 @media (min-width: 560px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .service { padding: 1.4rem 1.25rem; font-size: 1.08rem; }
   .form-row { grid-template-columns: 1fr 1fr; }
   .visit-details { flex-direction: row; }
   .visit-details .sep { display: inline; }
@@ -541,13 +541,22 @@ blockquote, figure { margin: 0; }
 
   .story { grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center; }
   .next-gen { grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; }
-  .team-grid { grid-template-columns: repeat(4, 1fr); }
+  .team-grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .team-avatar { height: 150px; }
+  .team-avatar span { width: 88px; height: 88px; }
+  .team-avatar svg { width: 44px; height: 44px; }
+  .team-body { padding: 1.4rem 1.25rem 1.6rem; }
+  .team-body h3 { font-size: 1.4rem; }
 
   .contact-grid { grid-template-columns: .9fr 1.1fr; gap: 3rem; }
   .info-card { padding: 2.5rem; }
   .form-card { padding: 2.5rem; }
 
   .footer-grid { grid-template-columns: 1.3fr 1fr 1fr; gap: 3rem; }
+}
+
+@media (max-width: 340px) {
+  .services-grid, .team-grid { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 1200px) {
