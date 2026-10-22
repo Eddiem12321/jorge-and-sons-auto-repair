@@ -28,7 +28,7 @@ A four-page marketing site for **Jorge & Sons Auto Repair**, a family-owned mech
 - **Logo:** a type-only wordmark framed like a hand-painted shop sign, a nod to Jorge painting the original sign himself. It uses only the business name, so it adds no new copy.
 - **Mobile-first:** most customers will visit on a phone, so every phone number is a `tel:9735550142` link and a sticky **Call** bar stays at the bottom of the screen on small devices. The header collapses into a hamburger menu (it closes with Escape, an outside click, or when the screen widens).
 - **Subtle motion:** gentle hover lifts and a fade-in on scroll, both turned off for visitors who set "reduce motion".
-- **Background video:** the Home and Services headers play a muted, looping repair video. It only plays while it is on screen, a small button pauses it (for accessibility), and visitors with reduced motion or Data Saver turned on see a still image instead.
+- **Background video:** the Home and Services headers play a muted playlist of repair clips (five on Home, three on Services). Each clip runs about nine seconds, then crossfades into the next, and the list repeats. Video only plays while it is on screen, a small button pauses it (for accessibility), and visitors with reduced motion or Data Saver turned on see a still image instead.
 - **Small touches:** on the Contact page, today's hours are highlighted automatically. The "Four bays now" line on the About page gets a small four-bay illustration.
 
 ## Copy rules
@@ -60,7 +60,13 @@ Videos are free to use under the [Pexels License](https://www.pexels.com/license
 | Where | Video | Videographer |
 | --- | --- | --- |
 | Home, opening | [Person Repairing a Car Engine](https://www.pexels.com/video/person-repairing-a-car-engine-8469674/) | [Anastasia Shuraeva](https://www.pexels.com/@anastasia-shuraeva/) |
+| Home, opening | [Mechanic Working on an Engine](https://www.pexels.com/video/mechanic-working-on-an-engine-8986876/) | [Artem Podrez](https://www.pexels.com/@artempodrez/) |
+| Home, opening | [Female Mechanic Fixing an Engine](https://www.pexels.com/video/female-mechanic-fixing-an-engine-5637834/) | [Tima Miroshnichenko](https://www.pexels.com/@tima-miroshnichenko/) |
+| Home, opening | [Mechanic Repairing Car Engine in Workshop](https://www.pexels.com/video/mechanic-repairing-car-engine-in-workshop-32329382/) | [Vitaliy Izonin](https://www.pexels.com/@izonin/) |
+| Home, opening | [A Man Checking the Car Engine](https://www.pexels.com/video/a-man-checking-the-car-engine-8986890/) | [Artem Podrez](https://www.pexels.com/@artempodrez/) |
 | Services, header | [Close-up of a Car Engine Showing Mechanical Details](https://www.pexels.com/video/close-up-of-a-car-engine-showing-mechanical-details-39112150/) | [Pedro H. Novais](https://www.pexels.com/@pedro-h-novais-2154429539/) |
+| Services, header | [An Auto Mechanic Repairing an Engine](https://www.pexels.com/video/an-auto-mechanic-repairing-an-engine-8987200/) | [Artem Podrez](https://www.pexels.com/@artempodrez/) |
+| Services, header | [Low Angle Shot of a Mechanic Working on an Engine](https://www.pexels.com/video/low-angle-shot-of-a-mechanic-working-on-an-engine-8986893/) | [Artem Podrez](https://www.pexels.com/@artempodrez/) |
 
 Icons are inline SVGs. Some are drawn by hand and others are adapted from [Feather Icons](https://feathericons.com/) (MIT License).
 
