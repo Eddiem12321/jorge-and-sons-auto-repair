@@ -62,9 +62,8 @@
   }
 
   /* ---------- Scroll-scrubbed video ----------
-     Scrolling moves the video forward, stopping scrolling pauses it, and
-     scrolling up plays it backward. "pin" holds the hero in place while the
-     video plays; "through" plays it as the section scrolls out of view.
+     The video plays while you scroll: down moves it forward, stopping pauses
+     it, and up plays it backward, all while the page scrolls normally.
      Skipped for reduced motion and Data Saver, where the poster image stays. */
   var saveData = navigator.connection && navigator.connection.saveData;
   if (!reduceMotion && !saveData) {
@@ -74,20 +73,17 @@
   function initScrub(track) {
     var video = track.querySelector(".scrub-video");
     if (!video) return;
-    var mode = track.getAttribute("data-scrub");
-    var pinned = mode === "pin" ? track.firstElementChild : null;
     var start = parseFloat(video.getAttribute("data-start") || "0");
     var end = 0, current = start, target = start;
     var seeking = false, ready = false, visible = true, raf = 0;
     var src = window.innerWidth >= 1200 ? video.getAttribute("data-src-lg") : video.getAttribute("data-src-md");
 
-    if (pinned) track.classList.add("is-pinned");
     video.muted = true;
 
     function progress() {
       var rect = track.getBoundingClientRect();
       var headerBottom = document.querySelector(".site-header").getBoundingClientRect().bottom;
-      var distance = pinned ? track.offsetHeight - pinned.offsetHeight : track.offsetHeight;
+      var distance = track.offsetHeight;
       var p = distance > 0 ? (headerBottom - rect.top) / distance : 0;
       return Math.min(1, Math.max(0, p));
     }
