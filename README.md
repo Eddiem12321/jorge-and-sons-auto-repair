@@ -29,6 +29,9 @@ A four-page marketing site for **Jorge & Sons Auto Repair**, a family-owned mech
 - **Mobile-first:** most customers will visit on a phone, so every phone number is a `tel:9735550142` link and a sticky **Call** bar stays at the bottom of the screen on small devices. The header collapses into a hamburger menu (it closes with Escape, an outside click, or when the screen widens).
 - **Subtle motion:** gentle hover lifts and a fade-in on scroll, both turned off for visitors who set "reduce motion".
 - **Background video:** the Home and Services headers play a muted playlist of repair clips (five on Home, three on Services). Each clip runs about nine seconds, then crossfades into the next, and the list repeats. Video only plays while it is on screen, a small button pauses it (for accessibility), and visitors with reduced motion or Data Saver turned on see a still image instead.
+- **About timeline:** the story is laid out on a timeline whose dots fill in and line draws down as you scroll, with 1989 and 1998 picked out in amber. It reuses the copy exactly; only the layout changed.
+- **Services link to the form:** every service tile links to the Contact page with that service already filled into the message box. Each tile's icon also animates (the tire spins, the wrench turns, the check-engine light blinks), on hover with a mouse or once as it scrolls in on a phone.
+- **Search-ready:** the Home and Contact pages include schema.org `AutoRepair` structured data (address, phone, hours, founding year, languages, services) so search engines and maps can read the shop's details. It isn't visible on the page.
 - **Small touches:** on the Contact page, today's hours are highlighted automatically. The "Four bays now" line on the About page gets a small four-bay illustration.
 
 ## Copy rules
@@ -45,6 +48,19 @@ All on-page text is the client copy, used verbatim. The only additions are funct
 - Color contrast meets WCAG AA (for example, white on burnt orange is 5.1:1 and amber on charcoal is 7.7:1).
 - Visible focus outlines, a skip link, a hamburger button with `aria-expanded`/`aria-controls`, `aria-current` on the active page, and decorative icons hidden from screen readers.
 - Every content image has descriptive alt text. Every form field has a `<label>`.
+
+## Performance
+
+[PageSpeed Insights](https://pagespeed.web.dev/) (Lighthouse) results for the live site, October 22, 2026:
+
+| Page | Mobile | Desktop |
+| --- | --- | --- |
+| Home | 90 | 100 |
+| Services | 90 | 99 |
+| About | 89 | 99 |
+| Contact | 100 | 99 |
+
+Accessibility, Best Practices, and SEO scored 100 on every page. To get there, Google Fonts load without blocking the first paint, the script is deferred, background video only starts downloading after the page has loaded, and images are sized for phones. Mobile performance is held back mainly by the background video downloads and GitHub Pages' fixed 10-minute cache lifetime, which a site on GitHub Pages can't change.
 
 ## Photo credits
 
