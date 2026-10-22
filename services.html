@@ -65,15 +65,15 @@
 
   <main id="main">
     <!-- What We Fix -->
-    <!-- Scroll-scrubbed video: plays forward as the header scrolls away, backward on the way up -->
-    <section class="page-hero page-hero--image" aria-labelledby="page-title" data-scrub="through">
+    <!-- Muted, looping background video (loaded by JS; the image is the fallback) -->
+    <section class="page-hero page-hero--image" aria-labelledby="page-title">
       <div class="page-hero-media">
         <img src="https://images.pexels.com/videos/39112150/pexels-photo-39112150.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
              srcset="https://images.pexels.com/videos/39112150/pexels-photo-39112150.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800 800w,
                      https://images.pexels.com/videos/39112150/pexels-photo-39112150.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600 1600w"
              sizes="100vw" width="1600" height="900" fetchpriority="high"
              alt="Close-up of a car’s engine bay, with hoses, belts, and orange-capped fittings">
-        <video class="scrub-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1"
+        <video class="bg-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
                data-src-md="https://videos.pexels.com/video-files/39112150/16640571_960_540_24fps.mp4"
                data-src-lg="https://videos.pexels.com/video-files/39112150/16640573_1280_720_24fps.mp4"></video>
       </div>
@@ -82,6 +82,10 @@
         <h1 id="page-title">Free estimates on every job, and the price we quote is the price you pay.</h1>
         <p class="lead">Most repairs are finished the same day. For bigger jobs, we call you with a quote before any work begins.</p>
       </div>
+      <button class="video-toggle" type="button" aria-label="Pause background video" hidden>
+        <svg class="vt-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+        <svg class="vt-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+      </button>
     </section>
 
     <section class="section" aria-label="What We Fix">
