@@ -324,16 +324,49 @@ blockquote, figure { margin: 0; }
   background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 1.15rem 1rem;
   font-weight: 600; font-size: 1rem; line-height: 1.35; color: var(--ink);
+  position: relative; height: 100%; text-decoration: none;
   transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
 }
-.service:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: #cbbda7; }
+.service:hover, .service:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow); border-color: #cbbda7; color: var(--ink); }
+/* Each tile links to the contact form with that service filled in */
+.service-go {
+  position: absolute; top: 1rem; right: 1rem; width: 18px; height: 18px; color: var(--accent);
+  opacity: .45; transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+.service:hover .service-go, .service:focus-visible .service-go { opacity: 1; transform: translateX(3px); }
 .service-icon {
   flex: none; display: grid; place-items: center;
   width: 52px; height: 52px; border-radius: 50%;
   background: #fbeee3; color: var(--accent);
   transition: background-color .25s var(--ease), color .25s var(--ease);
 }
-.service:hover .service-icon { background: var(--accent); color: var(--white); }
+.service:hover .service-icon, .service:focus-visible .service-icon { background: var(--accent); color: var(--white); }
+
+/* Icon animations: on hover/focus with a mouse, or once as each tile scrolls in on touch screens */
+.service-icon--oil { --icon-anim: icon-drip; }
+.service-icon--brakes, .service-icon--tire { --icon-anim: icon-spin; }
+.service-icon--engine-light { --icon-anim: icon-blink; }
+.service-icon--wrench { --icon-anim: icon-turn; }
+.service-icon--transmission { --icon-anim: icon-shift; }
+.service-icon--suspension { --icon-anim: icon-spring; }
+.service-icon--hvac { --icon-anim: icon-fan; }
+.service-icon--battery { --icon-anim: icon-charge; }
+.service-icon--inspection { --icon-anim: icon-check; }
+@media (hover: hover) {
+  .service:hover .service-icon svg, .service:focus-visible .service-icon svg { animation: var(--icon-anim) .9s var(--ease) 1; }
+}
+@media (hover: none) {
+  .is-visible > .service .service-icon svg { animation: var(--icon-anim) .9s var(--ease) .45s 1 both; }
+}
+@keyframes icon-drip { 0%, 100% { transform: none; } 35% { transform: translateY(4px) scaleY(.9); } 60% { transform: translateY(-2px); } }
+@keyframes icon-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes icon-blink { 0%, 40%, 80%, 100% { opacity: 1; } 20%, 60% { opacity: .2; } }
+@keyframes icon-turn { 0%, 100% { transform: none; } 30% { transform: rotate(-28deg); } 65% { transform: rotate(14deg); } }
+@keyframes icon-shift { 0%, 100% { transform: none; } 25% { transform: translate(-3px, 2px); } 55% { transform: translate(3px, -2px); } 80% { transform: translate(-1px, 1px); } }
+@keyframes icon-spring { 0%, 100% { transform: none; } 30% { transform: scaleY(.72); } 60% { transform: scaleY(1.12); } 80% { transform: scaleY(.95); } }
+@keyframes icon-fan { from { transform: rotate(0); } to { transform: rotate(180deg); } }
+@keyframes icon-charge { 0%, 100% { transform: none; } 40% { transform: scale(1.18); } 70% { transform: scale(.94); } }
+@keyframes icon-check { 0%, 100% { transform: none; } 30% { transform: rotate(-10deg) scale(1.12); } 60% { transform: rotate(8deg); } }
 .service-icon svg { width: 26px; height: 26px; }
 .services-cta { margin-top: 2.5rem; }
 
@@ -354,11 +387,38 @@ blockquote, figure { margin: 0; }
 /* ---------- About ---------- */
 .story { display: grid; gap: 2.5rem; }
 .story-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); background: var(--paper-2); }
-.story-text .body-copy p { margin-bottom: 1.25em; }
-.dropcap::first-letter {
-  float: left; font-family: var(--font-display); font-weight: 700; color: var(--accent);
-  font-size: 3.6em; line-height: .85; padding: .08em .1em 0 0;
+.tl-year { color: var(--accent-dark); font-weight: 700; }
+.page-hero .tl-year { color: var(--accent-light); }
+
+/* About: a timeline that draws itself as you scroll (JS adds .is-visible) */
+.timeline { position: relative; margin: 0; padding: 0; list-style: none; }
+.timeline::before {
+  content: ""; position: absolute; left: 9px; top: .9rem; bottom: .9rem; width: 2px; background: var(--line);
 }
+.timeline--continues::before { bottom: -2.5rem; background: linear-gradient(var(--line) 85%, transparent); }
+.timeline--resumes::before { top: -2.5rem; background: linear-gradient(transparent, var(--line) 15%); }
+.tl-item { position: relative; padding: 0 0 2.25rem 2.75rem; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item p { color: var(--muted); font-size: 1.1rem; }
+.tl-item::before {
+  content: ""; position: absolute; left: 0; top: .3rem; z-index: 1;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--paper); border: 3px solid var(--line);
+  transition: background-color .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease);
+}
+.tl-item::after {
+  content: ""; position: absolute; left: 9px; top: 1.55rem; bottom: -.3rem; width: 2px;
+  background: var(--accent); transform: scaleY(0); transform-origin: top;
+  transition: transform .9s var(--ease) .25s;
+}
+.tl-item:last-child::after { display: none; }
+.timeline--continues .tl-item:last-child::after { display: block; bottom: -2.5rem; background: linear-gradient(var(--accent), transparent); }
+.tl-item.is-visible::before, html:not(.js) .tl-item::before { background: var(--accent); border-color: var(--accent); transform: scale(1.1); }
+.tl-item.is-visible::after, html:not(.js) .tl-item::after { transform: scaleY(1); }
+.tl-item .closing-line { border-left: 0; padding-left: 0; color: var(--ink); font-size: clamp(1.4rem, 4.6vw, 1.9rem); }
+.tl-item--now::before { left: -2px; width: 24px; height: 24px; top: .35rem; }
+.tl-item--now.is-visible::before { animation: tl-pulse 2.4s var(--ease) .8s infinite; }
+@keyframes tl-pulse { 0% { box-shadow: 0 0 0 0 rgba(180, 80, 26, .45); } 70%, 100% { box-shadow: 0 0 0 14px rgba(180, 80, 26, 0); } }
 
 .pull-quote {
   position: relative; margin: 0 auto; max-width: 900px; text-align: center; padding: 1rem 0;
