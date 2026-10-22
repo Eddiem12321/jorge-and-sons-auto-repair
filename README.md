@@ -28,7 +28,7 @@ A four-page marketing site for **Jorge & Sons Auto Repair**, a family-owned mech
 - **Logo:** a type-only wordmark framed like a hand-painted shop sign, a nod to Jorge painting the original sign himself. It uses only the business name, so it adds no new copy.
 - **Mobile-first:** most customers will visit on a phone, so every phone number is a `tel:9735550142` link and a sticky **Call** bar stays at the bottom of the screen on small devices. The header collapses into a hamburger menu (it closes with Escape, an outside click, or when the screen widens).
 - **Subtle motion:** gentle hover lifts and a fade-in on scroll, both turned off for visitors who set "reduce motion".
-- **Scroll-driven video:** on the Home page the opening section stays pinned while you scroll, and scrolling moves a repair video forward. Stop scrolling and it stops; scroll up and it plays backward. The Services header does the same as it scrolls away. Each clip downloads once so scrubbing stays smooth, and visitors with reduced motion or Data Saver turned on see a still image instead.
+- **Scroll-driven video:** the Home and Services headers play a repair video while you scroll. The page scrolls normally and the video moves with it: stop scrolling and it stops, scroll up and it plays backward. Each clip downloads once so scrubbing stays smooth, and visitors with reduced motion or Data Saver turned on see a still image instead.
 - **Small touches:** on the Contact page, today's hours are highlighted automatically. The "Four bays now" line on the About page gets a small four-bay illustration.
 
 ## Copy rules
