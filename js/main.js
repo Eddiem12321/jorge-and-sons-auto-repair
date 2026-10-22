@@ -62,9 +62,11 @@
   }
 
   /* ---------- Background video ----------
-     Muted, looping clips behind the Home and Services headers. They only play
-     while on screen, can be paused with the button, and are skipped for
-     reduced motion and Data Saver, where the still image stays instead. */
+     Muted clips behind the Home and Services headers. Each header has a short
+     playlist: every clip plays for a few seconds, then crossfades to the next,
+     and the list repeats. Videos only play while on screen, can be paused with
+     the button, and are skipped for reduced motion and Data Saver, where the
+     still image stays instead. */
   var saveData = navigator.connection && navigator.connection.saveData;
   if (!reduceMotion && !saveData) {
     document.querySelectorAll(".bg-video").forEach(initBgVideo);
@@ -73,40 +75,87 @@
   function initBgVideo(video) {
     var section = video.closest("section");
     var toggle = section.querySelector(".video-toggle");
-    var userPaused = false;
+    var size = window.innerWidth >= 1200 ? "data-lg" : "data-md";
+    var clips = (video.getAttribute(size) || "").trim().split(/\s+/).filter(Boolean);
+    var clipSeconds = parseFloat(video.getAttribute("data-clip-seconds") || "9");
+    var players = [video];
+    var active = 0, index = 0, switching = false, userPaused = false, onScreen = false;
+    if (!clips.length) return;
 
-    function play() {
-      var p = video.play();
-      if (p && p.catch) p.catch(function () {});
+    // A second, stacked video preloads the next clip so each switch is a crossfade
+    if (clips.length > 1) {
+      players.push(video.parentNode.appendChild(video.cloneNode(false)));
+    } else {
+      video.loop = true;
     }
 
-    video.muted = true;
-    video.addEventListener("playing", function () {
-      video.classList.add("is-ready");
-      if (toggle) toggle.hidden = false;
+    function play(p) {
+      var r = p.play();
+      if (r && r.catch) r.catch(function () {});
+    }
+
+    function load(p, i) {
+      p.preload = "auto";
+      p.src = clips[i % clips.length];
+    }
+
+    function advance() {
+      if (switching || players.length < 2) return;
+      switching = true;
+      var current = players[active];
+      var upcoming = players[1 - active];
+      active = 1 - active;
+      index += 1;
+      upcoming.currentTime = 0;
+      current.classList.remove("is-front");
+      upcoming.classList.add("is-ready", "is-front");
+      if (!userPaused && onScreen) play(upcoming);
+      // After the fade, park the old clip and preload the one after next
+      setTimeout(function () {
+        current.classList.remove("is-ready");
+        current.pause();
+        load(current, index + 1);
+        switching = false;
+      }, 1100);
+    }
+
+    players.forEach(function (p, n) {
+      p.muted = true;
+      p.addEventListener("playing", function () {
+        if (n !== active) return;
+        p.classList.add("is-ready", "is-front");
+        if (toggle) toggle.hidden = false;
+        if (players[1] && !players[1].getAttribute("src")) load(players[1], 1);
+      });
+      p.addEventListener("timeupdate", function () {
+        if (n === active && p.currentTime >= clipSeconds) advance();
+      });
+      p.addEventListener("ended", function () {
+        if (n === active) advance();
+      });
     });
-    video.src = window.innerWidth >= 1200 ? video.getAttribute("data-src-lg") : video.getAttribute("data-src-md");
+
+    load(video, 0);
 
     if (toggle) {
       toggle.addEventListener("click", function () {
         userPaused = !userPaused;
-        if (userPaused) video.pause(); else play();
+        if (userPaused) players[active].pause(); else play(players[active]);
         toggle.classList.toggle("is-paused", userPaused);
         toggle.setAttribute("aria-label", userPaused ? "Play background video" : "Pause background video");
       });
     }
 
-    // Pause when scrolled out of view to save battery and data
+    // Only play while the header is on screen, to save battery and data
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) {
-          if (!userPaused) play();
-        } else {
-          video.pause();
-        }
+        onScreen = entries[0].isIntersecting;
+        if (onScreen && !userPaused) play(players[active]);
+        else players[active].pause();
       }).observe(section);
     } else {
-      play();
+      onScreen = true;
+      play(video);
     }
   }
 
