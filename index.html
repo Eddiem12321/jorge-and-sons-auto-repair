@@ -53,8 +53,8 @@
 
   <main id="main">
     <!-- Opening -->
-    <!-- Scroll-scrubbed video: plays forward as you scroll down, backward as you scroll up -->
-    <section class="hero" aria-labelledby="hero-title" data-scrub="through">
+    <!-- Muted, looping background video (loaded by JS; the image is the fallback) -->
+    <section class="hero" aria-labelledby="hero-title">
       <div class="hero-media">
         <img src="https://images.pexels.com/videos/8469674/breakdown-car-painting-car-repair-driver-8469674.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
              srcset="https://images.pexels.com/videos/8469674/breakdown-car-painting-car-repair-driver-8469674.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800 800w,
@@ -62,10 +62,9 @@
                      https://images.pexels.com/videos/8469674/breakdown-car-painting-car-repair-driver-8469674.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=2400 2400w"
              sizes="100vw" width="1600" height="900" fetchpriority="high"
              alt="A mechanic’s hands work a wrench into the engine bay of a red car">
-        <video class="scrub-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1"
+        <video class="bg-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
                data-src-md="https://videos.pexels.com/video-files/8469674/8469674-sd_960_540_25fps.mp4"
-               data-src-lg="https://videos.pexels.com/video-files/8469674/8469674-hd_1280_720_25fps.mp4"
-               data-end="14"></video>
+               data-src-lg="https://videos.pexels.com/video-files/8469674/8469674-hd_1280_720_25fps.mp4"></video>
       </div>
       <div class="container hero-content">
         <span class="rule" aria-hidden="true"></span>
@@ -73,6 +72,10 @@
         <p class="hero-tagline">Honest repairs in East Orange since 1998.</p>
         <a class="btn btn--primary" href="contact.html">Schedule a Repair <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
+      <button class="video-toggle" type="button" aria-label="Pause background video" hidden>
+        <svg class="vt-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+        <svg class="vt-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+      </button>
     </section>
 
     <!-- Our Promise -->
