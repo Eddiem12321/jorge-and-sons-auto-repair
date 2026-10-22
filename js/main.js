@@ -135,7 +135,13 @@
       });
     });
 
-    load(video, 0);
+    // Start downloading the first clip only once the page itself has finished loading
+    function start() {
+      load(video, 0);
+      if (onScreen && !userPaused) play(video);
+    }
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
 
     if (toggle) {
       toggle.addEventListener("click", function () {
