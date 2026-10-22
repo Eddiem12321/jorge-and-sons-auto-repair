@@ -25,6 +25,7 @@ A four-page marketing site for **Jorge & Sons Auto Repair**, a family-owned mech
 
 - **Feel:** a workshop palette of deep charcoal-navy (`#1b2129`), burnt orange (`#b4501a`) and amber (`#f0a15e`) accents, on warm off-white (`#f8f4ed`). It's meant to read as an honest, family-run neighborhood shop rather than a template.
 - **Type:** Zilla Slab (a sturdy slab serif, like a painted shop sign) for headlines, Barlow Condensed for buttons and navigation, and Source Sans 3 for body text. All from Google Fonts.
+- **Logo:** a type-only wordmark framed like a hand-painted shop sign, a nod to Jorge painting the original sign himself. It uses only the business name, so it adds no new copy.
 - **Mobile-first:** most customers will visit on a phone, so every phone number is a `tel:9735550142` link and a sticky **Call** bar stays at the bottom of the screen on small devices. The header collapses into a hamburger menu (it closes with Escape, an outside click, or when the screen widens).
 - **Subtle motion:** gentle hover lifts and a fade-in on scroll, both turned off for visitors who set "reduce motion".
 - **Small touches:** on the Contact page, today's hours are highlighted automatically. The "Four bays now" line on the About page gets a small four-bay illustration.
