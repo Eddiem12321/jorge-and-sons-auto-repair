@@ -53,7 +53,7 @@
 
   <main id="main">
     <!-- Opening -->
-    <!-- Muted, looping background video (loaded by JS; the image is the fallback) -->
+    <!-- Muted background video playlist: clips crossfade every few seconds (loaded by JS; the image is the fallback) -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-media">
         <img src="https://images.pexels.com/videos/8469674/breakdown-car-painting-car-repair-driver-8469674.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600"
@@ -62,9 +62,18 @@
                      https://images.pexels.com/videos/8469674/breakdown-car-painting-car-repair-driver-8469674.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=2400 2400w"
              sizes="100vw" width="1600" height="900" fetchpriority="high"
              alt="A mechanic’s hands work a wrench into the engine bay of a red car">
-        <video class="bg-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
-               data-src-md="https://videos.pexels.com/video-files/8469674/8469674-sd_960_540_25fps.mp4"
-               data-src-lg="https://videos.pexels.com/video-files/8469674/8469674-hd_1280_720_25fps.mp4"></video>
+        <video class="bg-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1"
+               data-clip-seconds="9"
+               data-md="https://videos.pexels.com/video-files/8469674/8469674-sd_960_540_25fps.mp4
+                        https://videos.pexels.com/video-files/8986876/8986876-sd_960_540_30fps.mp4
+                        https://videos.pexels.com/video-files/5637834/5637834-sd_960_540_25fps.mp4
+                        https://videos.pexels.com/video-files/32329382/13790367_960_540_25fps.mp4
+                        https://videos.pexels.com/video-files/8986890/8986890-sd_960_540_30fps.mp4"
+               data-lg="https://videos.pexels.com/video-files/8469674/8469674-hd_1280_720_25fps.mp4
+                        https://videos.pexels.com/video-files/8986876/8986876-hd_1280_720_30fps.mp4
+                        https://videos.pexels.com/video-files/5637834/5637834-hd_1280_720_25fps.mp4
+                        https://videos.pexels.com/video-files/32329382/13790368_1280_720_25fps.mp4
+                        https://videos.pexels.com/video-files/8986890/8986890-hd_1280_720_30fps.mp4"></video>
       </div>
       <div class="container hero-content">
         <span class="rule" aria-hidden="true"></span>
