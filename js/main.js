@@ -166,6 +166,13 @@
     if (days.indexOf(today) !== -1) li.classList.add("is-today");
   });
 
+  /* ---------- Contact form: prefill the service picked on the Services page ---------- */
+  var pickedService = new URLSearchParams(window.location.search).get("service");
+  var messageField = document.getElementById("message");
+  if (pickedService && messageField && !messageField.value) {
+    messageField.value = pickedService.slice(0, 120);
+  }
+
   /* ---------- Contact form: front-end validation + confirmation ---------- */
   var form = document.getElementById("contact-form");
   var success = document.getElementById("form-success");
