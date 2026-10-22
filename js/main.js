@@ -61,101 +61,53 @@
     revealEls.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---------- Scroll-scrubbed video ----------
-     The video plays while you scroll: down moves it forward, stopping pauses
-     it, and up plays it backward, all while the page scrolls normally.
-     Skipped for reduced motion and Data Saver, where the poster image stays. */
+  /* ---------- Background video ----------
+     Muted, looping clips behind the Home and Services headers. They only play
+     while on screen, can be paused with the button, and are skipped for
+     reduced motion and Data Saver, where the still image stays instead. */
   var saveData = navigator.connection && navigator.connection.saveData;
   if (!reduceMotion && !saveData) {
-    document.querySelectorAll("[data-scrub]").forEach(initScrub);
+    document.querySelectorAll(".bg-video").forEach(initBgVideo);
   }
 
-  function initScrub(track) {
-    var video = track.querySelector(".scrub-video");
-    if (!video) return;
-    var start = parseFloat(video.getAttribute("data-start") || "0");
-    var end = 0, current = start, target = start;
-    var seeking = false, ready = false, visible = true, raf = 0;
-    var src = window.innerWidth >= 1200 ? video.getAttribute("data-src-lg") : video.getAttribute("data-src-md");
+  function initBgVideo(video) {
+    var section = video.closest("section");
+    var toggle = section.querySelector(".video-toggle");
+    var userPaused = false;
+
+    function play() {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    }
 
     video.muted = true;
-
-    function progress() {
-      var rect = track.getBoundingClientRect();
-      var headerBottom = document.querySelector(".site-header").getBoundingClientRect().bottom;
-      var distance = track.offsetHeight;
-      var p = distance > 0 ? (headerBottom - rect.top) / distance : 0;
-      return Math.min(1, Math.max(0, p));
-    }
-
-    function update() {
-      var p = progress();
-      track.style.setProperty("--p", p.toFixed(4));
-      if (end) target = start + (end - start) * p;
-    }
-
-    function seek(t) {
-      seeking = true;
-      video.currentTime = t;
-    }
-
-    // Ease toward the scroll position so fast flicks still look smooth,
-    // and only ask for a new frame once the last seek has finished.
-    function tick() {
-      raf = 0;
-      if (!end) return;
-      current += (target - current) * 0.18;
-      if (Math.abs(target - current) < 0.01) current = target;
-      if (!seeking && Math.abs(video.currentTime - current) > 0.015) seek(current);
-      if (current !== target) raf = requestAnimationFrame(tick);
-    }
-
-    function schedule() {
-      if (!raf) raf = requestAnimationFrame(tick);
-    }
-
-    video.addEventListener("seeked", function () {
-      seeking = false;
-      if (!ready) {
-        ready = true;
-        video.classList.add("is-ready");
-      }
-      schedule();
+    video.addEventListener("playing", function () {
+      video.classList.add("is-ready");
+      if (toggle) toggle.hidden = false;
     });
+    video.src = window.innerWidth >= 1200 ? video.getAttribute("data-src-lg") : video.getAttribute("data-src-md");
 
-    video.addEventListener("loadedmetadata", function () {
-      var dataEnd = parseFloat(video.getAttribute("data-end") || "0");
-      end = dataEnd && dataEnd < video.duration ? dataEnd : video.duration - 0.05;
-      update();
-      current = target;
-      seek(current);
-    });
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        userPaused = !userPaused;
+        if (userPaused) video.pause(); else play();
+        toggle.classList.toggle("is-paused", userPaused);
+        toggle.setAttribute("aria-label", userPaused ? "Play background video" : "Pause background video");
+      });
+    }
 
-    // Download the whole clip up front so scrubbing (especially backward) is instant
-    fetch(src).then(function (r) {
-      if (!r.ok) throw new Error(r.status);
-      return r.blob();
-    }).then(function (blob) {
-      video.src = URL.createObjectURL(blob);
-    }).catch(function () {
-      video.preload = "auto";
-      video.src = src;
-    });
-
-    window.addEventListener("scroll", function () {
-      if (!visible) return;
-      update();
-      schedule();
-    }, { passive: true });
-    window.addEventListener("resize", function () { update(); schedule(); });
-
+    // Pause when scrolled out of view to save battery and data
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
-        visible = entries[0].isIntersecting;
-        if (visible) { update(); schedule(); }
-      }).observe(track);
+        if (entries[0].isIntersecting) {
+          if (!userPaused) play();
+        } else {
+          video.pause();
+        }
+      }).observe(section);
+    } else {
+      play();
     }
-    update();
   }
 
   /* ---------- Highlight today's hours (contact page) ---------- */
