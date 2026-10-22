@@ -30,6 +30,7 @@
   --gutter: 1.25rem;
   --radius: 6px;
   --header-h: 68px;
+  --callbar-h: calc(71.2px + env(safe-area-inset-bottom, 0px)); /* mobile Call bar; the pinned hero stops above it */
   --shadow: 0 1px 2px rgba(27, 33, 41, .06), 0 8px 24px rgba(27, 33, 41, .08);
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
@@ -498,10 +499,10 @@ blockquote, figure { margin: 0; }
 }
 .scrub-video.is-ready { opacity: 1; }
 .scrub-track { position: relative; }
-.scrub-track.is-pinned { height: calc(100vh - var(--header-h) - 3px + 130vh); height: calc(100svh - var(--header-h) - 3px + 130vh); }
+.scrub-track.is-pinned { height: calc(100vh - var(--header-h) - 3px - var(--callbar-h) + 130vh); height: calc(100svh - var(--header-h) - 3px - var(--callbar-h) + 130vh); }
 .scrub-track.is-pinned > .hero {
   position: sticky; top: calc(var(--header-h) + 3px);
-  min-height: 0; height: calc(100vh - var(--header-h) - 3px); height: calc(100svh - var(--header-h) - 3px);
+  min-height: 0; height: calc(100vh - var(--header-h) - 3px - var(--callbar-h)); height: calc(100svh - var(--header-h) - 3px - var(--callbar-h));
 }
 .scroll-cue, .scrub-progress { display: none; }
 .is-pinned .scroll-cue {
@@ -544,7 +545,7 @@ blockquote, figure { margin: 0; }
 }
 
 @media (min-width: 900px) {
-  :root { --gutter: 2rem; --header-h: 80px; }
+  :root { --gutter: 2rem; --header-h: 80px; --callbar-h: 0px; }
   .site-footer { padding-bottom: 0; }
   .call-bar { display: none; }
   .section { padding: 6.5rem 0; }
