@@ -70,9 +70,10 @@
         <div class="story-media reveal">
           <img src="https://images.unsplash.com/photo-1676018366904-c083ed678e60?auto=format&amp;fit=crop&amp;w=900&amp;h=1125&amp;q=70"
                srcset="https://images.unsplash.com/photo-1676018366904-c083ed678e60?auto=format&amp;fit=crop&amp;w=600&amp;h=750&amp;q=70 600w,
+                       https://images.unsplash.com/photo-1676018366904-c083ed678e60?auto=format&amp;fit=crop&amp;w=700&amp;h=875&amp;q=70 700w,
                        https://images.unsplash.com/photo-1676018366904-c083ed678e60?auto=format&amp;fit=crop&amp;w=900&amp;h=1125&amp;q=70 900w,
                        https://images.unsplash.com/photo-1676018366904-c083ed678e60?auto=format&amp;fit=crop&amp;w=1200&amp;h=1500&amp;q=65 1200w"
-               sizes="(min-width: 900px) 500px, 100vw" width="900" height="1125" loading="lazy" decoding="async"
+               sizes="(min-width: 900px) 500px, calc(100vw - 2.5rem)" width="900" height="1125" decoding="async"
                alt="A mechanic works at a bench inside a small, warmly lit garage lined with tools, with a car raised on a lift beside him">
         </div>
         <!-- Timeline: each dot fills and the line draws down as you scroll -->
@@ -184,6 +185,6 @@
     <a href="tel:9735550142"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call</a>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
