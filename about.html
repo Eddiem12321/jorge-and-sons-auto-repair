@@ -58,7 +58,7 @@
     <section class="page-hero" aria-labelledby="page-title">
       <div class="container">
         <p class="eyebrow">A family shop since 1998</p>
-        <h1 id="page-title">Jorge Ramírez came to New Jersey from Puebla, Mexico, in 1989 with a suitcase and his father’s wrenches.</h1>
+        <h1 id="page-title">Jorge Ramírez came to New Jersey from Puebla, Mexico, in <span class="tl-year">1989</span> with a suitcase and his father’s wrenches.</h1>
       </div>
     </section>
 
@@ -72,13 +72,15 @@
                sizes="(min-width: 900px) 500px, 100vw" width="900" height="1125" loading="lazy" decoding="async"
                alt="A mechanic works at a bench inside a small, warmly lit garage lined with tools, with a car raised on a lift beside him">
         </div>
-        <div class="story-text reveal reveal-delay-1">
-          <span class="rule" aria-hidden="true"></span>
-          <div class="body-copy">
-            <p class="dropcap">He grew up fixing tractors and taxis in his father’s garage. In New Jersey, he spent nine years at shops in Newark and Irvington, learning every car that came through the door and saving what he could.</p>
-            <p>In 1998 he rented a single bay on Hollister Lane and painted the sign himself. His wife, Rosa, kept the books at the kitchen table.</p>
-          </div>
-        </div>
+        <!-- Timeline: each dot fills and the line draws down as you scroll -->
+        <ol class="timeline timeline--continues">
+          <li class="tl-item reveal">
+            <p>He grew up fixing tractors and taxis in his father’s garage. In New Jersey, he spent nine years at shops in Newark and Irvington, learning every car that came through the door and saving what he could.</p>
+          </li>
+          <li class="tl-item reveal">
+            <p>In <span class="tl-year">1998</span> he rented a single bay on Hollister Lane and painted the sign himself. His wife, Rosa, kept the books at the kitchen table.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -101,13 +103,15 @@
           <span class="rule" aria-hidden="true"></span>
           <h2 class="statement" id="next-title">Luis and Miguel grew up in the shop.</h2>
         </div>
-        <div class="reveal reveal-delay-1">
-          <div class="body-copy">
+        <ol class="timeline timeline--resumes">
+          <li class="tl-item reveal">
             <p>Luis was changing oil by twelve and now runs the service desk as an ASE-certified technician. Miguel handles engines and transmissions. Jorge still opens the doors at 7:30 every morning.</p>
-          </div>
-          <p class="closing-line" style="margin-top:1.75rem">Four bays now, and the same promise we started with.</p>
-          <div class="bays" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-        </div>
+          </li>
+          <li class="tl-item tl-item--now reveal">
+            <p class="closing-line">Four bays now, and the same promise we started with.</p>
+            <div class="bays" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          </li>
+        </ol>
       </div>
     </section>
 
