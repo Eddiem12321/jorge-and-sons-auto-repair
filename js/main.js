@@ -61,6 +61,107 @@
     revealEls.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---------- Scroll-scrubbed video ----------
+     Scrolling moves the video forward, stopping scrolling pauses it, and
+     scrolling up plays it backward. "pin" holds the hero in place while the
+     video plays; "through" plays it as the section scrolls out of view.
+     Skipped for reduced motion and Data Saver, where the poster image stays. */
+  var saveData = navigator.connection && navigator.connection.saveData;
+  if (!reduceMotion && !saveData) {
+    document.querySelectorAll("[data-scrub]").forEach(initScrub);
+  }
+
+  function initScrub(track) {
+    var video = track.querySelector(".scrub-video");
+    if (!video) return;
+    var mode = track.getAttribute("data-scrub");
+    var pinned = mode === "pin" ? track.firstElementChild : null;
+    var start = parseFloat(video.getAttribute("data-start") || "0");
+    var end = 0, current = start, target = start;
+    var seeking = false, ready = false, visible = true, raf = 0;
+    var src = window.innerWidth >= 1200 ? video.getAttribute("data-src-lg") : video.getAttribute("data-src-md");
+
+    if (pinned) track.classList.add("is-pinned");
+    video.muted = true;
+
+    function progress() {
+      var rect = track.getBoundingClientRect();
+      var headerBottom = document.querySelector(".site-header").getBoundingClientRect().bottom;
+      var distance = pinned ? track.offsetHeight - pinned.offsetHeight : track.offsetHeight;
+      var p = distance > 0 ? (headerBottom - rect.top) / distance : 0;
+      return Math.min(1, Math.max(0, p));
+    }
+
+    function update() {
+      var p = progress();
+      track.style.setProperty("--p", p.toFixed(4));
+      if (end) target = start + (end - start) * p;
+    }
+
+    function seek(t) {
+      seeking = true;
+      video.currentTime = t;
+    }
+
+    // Ease toward the scroll position so fast flicks still look smooth,
+    // and only ask for a new frame once the last seek has finished.
+    function tick() {
+      raf = 0;
+      if (!end) return;
+      current += (target - current) * 0.18;
+      if (Math.abs(target - current) < 0.01) current = target;
+      if (!seeking && Math.abs(video.currentTime - current) > 0.015) seek(current);
+      if (current !== target) raf = requestAnimationFrame(tick);
+    }
+
+    function schedule() {
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+
+    video.addEventListener("seeked", function () {
+      seeking = false;
+      if (!ready) {
+        ready = true;
+        video.classList.add("is-ready");
+      }
+      schedule();
+    });
+
+    video.addEventListener("loadedmetadata", function () {
+      var dataEnd = parseFloat(video.getAttribute("data-end") || "0");
+      end = dataEnd && dataEnd < video.duration ? dataEnd : video.duration - 0.05;
+      update();
+      current = target;
+      seek(current);
+    });
+
+    // Download the whole clip up front so scrubbing (especially backward) is instant
+    fetch(src).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.blob();
+    }).then(function (blob) {
+      video.src = URL.createObjectURL(blob);
+    }).catch(function () {
+      video.preload = "auto";
+      video.src = src;
+    });
+
+    window.addEventListener("scroll", function () {
+      if (!visible) return;
+      update();
+      schedule();
+    }, { passive: true });
+    window.addEventListener("resize", function () { update(); schedule(); });
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) { update(); schedule(); }
+      }).observe(track);
+    }
+    update();
+  }
+
   /* ---------- Highlight today's hours (contact page) ---------- */
   var today = new Date().getDay();
   document.querySelectorAll(".hours li[data-days]").forEach(function (li) {
